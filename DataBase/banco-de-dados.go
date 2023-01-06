@@ -9,14 +9,19 @@ import (
 )
 
 func main() {
-	stringConexao := "dayan:########senha#######@/devbook?charset=utf8&parseTime=True&loc=Local"
+	// abrindo conexão com o banco
+	stringConexao := "nome:senha@/nome-do-banco?charset=utf8&parseTime=True&loc=Local"
+
 	db, erro := sql.Open("mysql", stringConexao)
 	if erro != nil {
+		// para a execução
 		log.Fatal(erro)
 	}
 
+	// fechando
 	defer db.Close()
 
+	//verificando se a conexão esta aberta
 	if erro = db.Ping(); erro != nil {
 		log.Fatal(erro)
 	}
