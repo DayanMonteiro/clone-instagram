@@ -16,7 +16,7 @@ func Conectar() (*sql.DB, error) {
 	}
 
 	/*
-	   O comando Ping() em Go é uma função que faz parte do pacote net,
+	   O comando Ping() na linguagem Go é uma função que faz parte do pacote net,
 	   e é utilizado para verificar se um determinado endereço de rede pode ser alcançado.
 	   Quando você chama a função ping, ela envia um pacote de dados para o endereço especificado e aguarda uma resposta.
 	   Se a resposta for recebida, isso indica que o endereço de rede pode ser alcançado e que a conexão é funcional.
