@@ -10,10 +10,8 @@ import (
 
 func main() {
 	config.Carregar()
-	fmt.Println(config.Porta)
-	fmt.Println(config.StringConexaoBanco)
 
-	fmt.Println("Rodando API!")
+	fmt.Printf("Escutando na porta %d", config.Porta)
 	r := router.Gerar()
 
 	// subir o servidor
