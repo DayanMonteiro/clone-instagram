@@ -6,6 +6,7 @@ import (
 	"api/src/repositorios"
 	"api/src/respostas"
 	"encoding/json"
+	"strings"
 
 	// "errors"
 	"io/ioutil"
@@ -50,12 +51,30 @@ func CriarUsuario(w http.ResponseWriter, r *http.Request) {
 
 // BuscarUsuarios busca todos os usuários salvos no banco
 func BuscarUsuarios(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Buscando todos os usuário!"))
+	nomeOuNick := strings.ToLower(r.URL.Query().Get("usuario"))
+
+	db, erro := banco.Conectar()
+	if erro != nil {
+		respostas.Erro(w, http.StatusInternalServerError, erro)
+		return
+	}
+	defer db.Close()
+
+	repositorio := repositorios.NovoRepositorioDeUsuarios(db)
+	usuarios, erro := repositorio.Buscar(nomeOuNick)
+	if erro != nil {
+		respostas.Erro(w, http.StatusInternalServerError, erro)
+		return
+	}
+
+	respostas.JSON(w, http.StatusOK, usuarios)
+
 }
 
 // BuscarUsuario busca um usuário salvo no banco
 func BuscarUsuario(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Buscando um usuário!"))
+	w.Write([]byte("Buscando usuário!"))
+
 }
 
 // AtualizarUsuario altera as informações de um usuário no banco
